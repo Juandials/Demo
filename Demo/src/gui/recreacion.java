@@ -31,6 +31,7 @@ public class recreacion extends JFrame{
     boolean ataca_elfo=false;
     boolean ataca_enano=false;
     boolean ataca_humano=false;
+    String[] posicion= {"null","null"};
     public static String eleccion;
 
 
@@ -73,6 +74,8 @@ public class recreacion extends JFrame{
         public void keyPressed(KeyEvent e) {
             
             if(e.getKeyCode()==KeyEvent.VK_UP){
+                posicion[0] = posicion [1];
+                posicion[1] = "arriba";
                 ataca_orco=false;
                 ataca_humano=false;
                 ataca_elfo=false;
@@ -94,6 +97,8 @@ public class recreacion extends JFrame{
 
 
             if(e.getKeyCode()==KeyEvent.VK_DOWN){
+                posicion[0] = posicion [1];
+                posicion[1] = "abajo";
                 ataca_orco=false;
                 ataca_humano=false;
                 ataca_elfo=false;
@@ -114,6 +119,8 @@ public class recreacion extends JFrame{
             }
             
             if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+                posicion[0] = posicion [1];
+                posicion[1] = "derecha";
                 ataca_orco=false;
                 ataca_humano=false;
                 ataca_elfo=false;
@@ -134,6 +141,8 @@ public class recreacion extends JFrame{
             }
             
             if(e.getKeyCode()==KeyEvent.VK_LEFT){
+                posicion[0] = posicion [1];
+                posicion[1] = "izquierda";
                 ataca_orco=false;
                 ataca_humano=false;
                 ataca_elfo=false;
@@ -153,8 +162,18 @@ public class recreacion extends JFrame{
                 }
             }
             
-            if(e.getKeyCode()==KeyEvent.VK_C){					
-                img = h.getImage(this.getClass().getResource("/assets/"+eleccion+"_ataca.png"));
+            if(e.getKeyCode()==KeyEvent.VK_C){
+                posicion[0] = posicion [1];
+                
+                if(posicion[1].equals("arriba")){
+                    img = h.getImage(this.getClass().getResource("/assets/"+eleccion+"_ataca_arriba.png"));
+                }else if(posicion[1].equals("derecha")){
+                    img = h.getImage(this.getClass().getResource("/assets/"+eleccion+"_ataca_derecha.png"));
+                }else if(posicion[1].equals("izquierda")){
+                    img = h.getImage(this.getClass().getResource("/assets/"+eleccion+"_ataca_izquierda.png"));
+                }else if(posicion[1].equals("abajo")){
+                    img = h.getImage(this.getClass().getResource("/assets/"+eleccion+"_ataca_abajo.png"));
+                }
                 
                 if(eleccion == "Orco"){
                     ataca_orco=true;
@@ -195,11 +214,33 @@ public class recreacion extends JFrame{
             g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
             g2d.drawImage(img, incx-40, incy-25, 90+incx, 50+incy, mxA, myA, mxA+112, myA+52, this);
         }else if(ataca_elfo==true){
-            mxA = (Incremento%6)*64;
-            myA = (Incremento/6)*52;
-            g2d = bi.createGraphics();
-            g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-            g2d.drawImage(img, incx-25, incy-25, 50+incx, 50+incy, mxA, myA, mxA+64, myA+52, this);
+            System.out.println(posicion[0]);
+            if (posicion[0].equals("derecha")){
+                mxA = (Incremento % 6) * 64;
+                myA = (Incremento / 6) * 52;
+                g2d = bi.createGraphics();
+                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                g2d.drawImage(img, incx - 25, incy - 25, 50 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
+            }else if(posicion[0].equals("arriba")){
+                mxA = (Incremento % 6) * 64;
+                myA = (Incremento / 6) * 52;
+                g2d = bi.createGraphics();
+                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                g2d.drawImage(img, incx - 25, incy - 25, 50 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
+            }else if(posicion[0].equals("izquierda")){
+                mxA = (Incremento % 6) * 64;
+                myA = (Incremento / 6) * 52;
+                g2d = bi.createGraphics();
+                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                g2d.drawImage(img, incx - 25, incy - 25, 50 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
+            }else if(posicion[0].equals("abajo")){
+                mxA = (Incremento % 6) * 64;
+                myA = (Incremento / 6) * 52;
+                g2d = bi.createGraphics();
+                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                g2d.drawImage(img, incx - 25, incy - 25, 50 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
+            }
+            
         }else if(ataca_humano==true){
             mxA = (Incremento%6)*128;
             myA = (Incremento/6)*52;
