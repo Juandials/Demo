@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -18,7 +17,7 @@ public class recreacion extends JFrame {
     Thread hilo;
     boolean inicio = false;
     BufferedImage bi;
-    Image img;
+    Image img,fondo;
     Toolkit h = Toolkit.getDefaultToolkit();
     Graphics2D g2d;
     int Incremento = 0;
@@ -65,6 +64,7 @@ public class recreacion extends JFrame {
     }
 
     public recreacion() {
+        fondo = h.getImage(this.getClass().getResource("/assets/map22x15_claro.png"));
         setSize(AnchoVentana, AltoVentana);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -167,26 +167,33 @@ public class recreacion extends JFrame {
                 if (e.getKeyCode() == KeyEvent.VK_C) {
                     posicion[0] = posicion[1];
 
-                    if (posicion[1].equals("arriba")) {
-                        img = h.getImage(this.getClass().getResource("/assets/" + eleccion + "_ataca_arriba.png"));
-                    } else if (posicion[1].equals("derecha")) {
-                        img = h.getImage(this.getClass().getResource("/assets/" + eleccion + "_ataca_derecha.png"));
-                    } else if (posicion[1].equals("izquierda")) {
-                        img = h.getImage(this.getClass().getResource("/assets/" + eleccion + "_ataca_izquierda.png"));
-                    } else if (posicion[1].equals("abajo")) {
-                        img = h.getImage(this.getClass().getResource("/assets/" + eleccion + "_ataca_abajo.png"));
+                    switch (posicion[1]) {
+                        case "arriba":
+                            img = h.getImage(this.getClass().getResource("/assets/" + eleccion + "_ataca_arriba.png"));
+                            break;
+                        case "derecha":
+                            img = h.getImage(this.getClass().getResource("/assets/" + eleccion + "_ataca_derecha.png"));
+                            break;
+                        case "izquierda":
+                            img = h.getImage(this.getClass().getResource("/assets/" + eleccion + "_ataca_izquierda.png"));
+                            break;
+                        case "abajo":
+                            img = h.getImage(this.getClass().getResource("/assets/" + eleccion + "_ataca_abajo.png"));
+                            break;
+                        default:
+                            break;
                     }
 
-                    if (eleccion == "Orco") {
+                    if ("Orco".equals(eleccion)) {
                         ataca_orco = true;
                     }
-                    if (eleccion == "Elfo") {
+                    if ("Elfo".equals(eleccion)) {
                         ataca_elfo = true;
                     }
-                    if (eleccion == "Humano") {
+                    if ("Humano".equals(eleccion)) {
                         ataca_humano = true;
                     }
-                    if (eleccion == "Enano") {
+                    if ("Enano".equals(eleccion)) {
                         ataca_enano = true;
                     }
                     Incremento = Incremento + 5;
@@ -202,115 +209,142 @@ public class recreacion extends JFrame {
 
     @Override
     public void paint(Graphics g) {
-        System.out.println("hilo");
         g.drawImage(bi, 0, 0, null);
         int mxA = (Incremento % 5) * 64;
         int myA = (Incremento / 5) * 52;
 
-        if (ataca_orco == true) {
-            if (posicion[0].equals("derecha")) {
-                mxA = (Incremento % 6) * 112;
-                myA = (Incremento / 6) * 52;
-                g2d = bi.createGraphics();
-                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-                g2d.drawImage(img, incx - 40, incy - 25, 90 + incx, 50 + incy, mxA, myA, mxA + 112, myA + 52, this);
-            } else if (posicion[0].equals("izquierda")) {
-                mxA = (Incremento % 6) * 112;
-                myA = (Incremento / 6) * 52;
-                g2d = bi.createGraphics();
-                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-                g2d.drawImage(img, incx - 40, incy - 25, 90 + incx, 50 + incy, mxA, myA, mxA + 112, myA + 52, this);
-            } else if (posicion[0].equals("arriba")) {
-                mxA = (Incremento % 6) * 112;
-                myA = (Incremento / 6) * 112;
-                g2d = bi.createGraphics();
-                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-                g2d.drawImage(img, incx - 75, incy - 105, 70 + incx, 50 + incy, mxA, myA, mxA + 112, myA + 112, this);
-            } else if (posicion[0].equals("abajo")) {
-                mxA = (Incremento % 6) * 112;
-                myA = (Incremento / 6) * 112;
-                g2d = bi.createGraphics();
-                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-                g2d.drawImage(img, incx - 45, incy - 40, 85 + incx, 120 + incy, mxA, myA, mxA + 112, myA + 112, this);
+        if(ataca_orco == true) {
+            switch (posicion[0]) {
+                case "derecha":
+                    mxA = (Incremento % 6) * 112;
+                    myA = (Incremento / 6) * 52;
+                    g2d = bi.createGraphics();
+                    g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                    g2d.drawImage(img, incx - 40, incy - 25, 90 + incx, 50 + incy, mxA, myA, mxA + 112, myA + 52, this);
+                    break;
+                case "izquierda":
+                    mxA = (Incremento % 6) * 112;
+                    myA = (Incremento / 6) * 52;
+                    g2d = bi.createGraphics();
+                    g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                    g2d.drawImage(img, incx - 40, incy - 25, 90 + incx, 50 + incy, mxA, myA, mxA + 112, myA + 52, this);
+                    break;
+                case "arriba":
+                    mxA = (Incremento % 6) * 112;
+                    myA = (Incremento / 6) * 112;
+                    g2d = bi.createGraphics();
+                    g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                    g2d.drawImage(img, incx - 75, incy - 105, 70 + incx, 50 + incy, mxA, myA, mxA + 112, myA + 112, this);
+                    break;
+                case "abajo":
+                    mxA = (Incremento % 6) * 112;
+                    myA = (Incremento / 6) * 112;
+                    g2d = bi.createGraphics();
+                    g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                    g2d.drawImage(img, incx - 45, incy - 40, 85 + incx, 120 + incy, mxA, myA, mxA + 112, myA + 112, this);
+                    break;
+                default:
+                    break;
             }
-        } else if (ataca_elfo == true) {
-            if (posicion[0].equals("derecha")) {
-                mxA = (Incremento % 6) * 64;
-                myA = (Incremento / 6) * 52;
-                g2d = bi.createGraphics();
-                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-                g2d.drawImage(img, incx - 25, incy - 25, 50 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
-            } else if (posicion[0].equals("arriba")) {
-                mxA = (Incremento % 6) * 64;
-                myA = (Incremento / 6) * 52;
-                g2d = bi.createGraphics();
-                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-                g2d.drawImage(img, incx - 25, incy - 25, 50 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
-            } else if (posicion[0].equals("izquierda")) {
-                mxA = (Incremento % 6) * 64;
-                myA = (Incremento / 6) * 52;
-                g2d = bi.createGraphics();
-                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-                g2d.drawImage(img, incx - 25, incy - 25, 50 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
-            } else if (posicion[0].equals("abajo")) {
-                mxA = (Incremento % 6) * 64;
-                myA = (Incremento / 6) * 52;
-                g2d = bi.createGraphics();
-                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-                g2d.drawImage(img, incx - 25, incy - 25, 50 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
+        } else if(ataca_elfo == true) {
+            switch (posicion[0]) {
+                case "derecha":
+                    mxA = (Incremento % 6) * 64;
+                    myA = (Incremento / 6) * 52;
+                    g2d = bi.createGraphics();
+                    g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                    g2d.drawImage(img, incx - 25, incy - 25, 50 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
+                    break;
+                case "arriba":
+                    mxA = (Incremento % 6) * 64;
+                    myA = (Incremento / 6) * 52;
+                    g2d = bi.createGraphics();
+                    g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                    g2d.drawImage(img, incx - 25, incy - 25, 50 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
+                    break;
+                case "izquierda":
+                    mxA = (Incremento % 6) * 64;
+                    myA = (Incremento / 6) * 52;
+                    g2d = bi.createGraphics();
+                    g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                    g2d.drawImage(img, incx - 25, incy - 25, 50 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
+                    break;
+                case "abajo":
+                    mxA = (Incremento % 6) * 64;
+                    myA = (Incremento / 6) * 52;
+                    g2d = bi.createGraphics();
+                    g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                    g2d.drawImage(img, incx - 25, incy - 25, 50 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
+                    break;
+                default:
+                    break;
             }
-        } else if (ataca_humano == true) {
-            if (posicion[0].equals("derecha")) {
-                mxA = (Incremento % 6) * 128;
-                myA = (Incremento / 6) * 52;
-                g2d = bi.createGraphics();
-                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-                g2d.drawImage(img, incx - 24, incy - 23, 145 + incx, 50 + incy, mxA, myA, mxA + 128, myA + 52, this);
-            }else if(posicion[0].equals("izquierda")){
-                mxA = (Incremento % 6) * 128;
-                myA = (Incremento / 6) * 52;
-                g2d = bi.createGraphics();
-                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-                g2d.drawImage(img, incx - 115, incy - 23, 54 + incx, 50 + incy, mxA, myA, mxA + 128, myA + 52, this);
-            }else if(posicion[0].equals("abajo")){
-                mxA = (Incremento % 6) * 112;
-                myA = (Incremento / 6) * 80;
-                g2d = bi.createGraphics();
-                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-                g2d.drawImage(img, incx - 50, incy - 35, 90 + incx, 70 + incy, mxA, myA, mxA + 112, myA + 80, this);
-            }else if(posicion[0].equals("arriba")){
-                mxA = (Incremento % 6) * 112;
-                myA = (Incremento / 6) * 80;
-                g2d = bi.createGraphics();
-                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-                g2d.drawImage(img, incx - 50, incy - 55, 90 + incx, 50 + incy, mxA, myA, mxA + 112, myA + 80, this);
+        } else if(ataca_humano == true) {
+            switch (posicion[0]) {
+                case "derecha":
+                    mxA = (Incremento % 6) * 128;
+                    myA = (Incremento / 6) * 52;
+                    g2d = bi.createGraphics();
+                    g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                    g2d.drawImage(img, incx - 24, incy - 23, 145 + incx, 50 + incy, mxA, myA, mxA + 128, myA + 52, this);
+                    break;
+                case "izquierda":
+                    mxA = (Incremento % 6) * 128;
+                    myA = (Incremento / 6) * 52;
+                    g2d = bi.createGraphics();
+                    g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                    g2d.drawImage(img, incx - 115, incy - 23, 54 + incx, 50 + incy, mxA, myA, mxA + 128, myA + 52, this);
+                    break;
+                case "abajo":
+                    mxA = (Incremento % 6) * 112;
+                    myA = (Incremento / 6) * 80;
+                    g2d = bi.createGraphics();
+                    g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                    g2d.drawImage(img, incx - 50, incy - 35, 90 + incx, 70 + incy, mxA, myA, mxA + 112, myA + 80, this);
+                    break;
+                case "arriba":
+                    mxA = (Incremento % 6) * 112;
+                    myA = (Incremento / 6) * 80;
+                    g2d = bi.createGraphics();
+                    g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                    g2d.drawImage(img, incx - 50, incy - 55, 90 + incx, 50 + incy, mxA, myA, mxA + 112, myA + 80, this);
+                    break;
+                default:
+                    break;
             }
             
         } else if (ataca_enano == true) {
-            if (posicion[0].equals("derecha")) {
-                mxA = (Incremento % 6) * 64;
-                myA = (Incremento / 6) * 52;
-                g2d = bi.createGraphics();
-                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-                g2d.drawImage(img, incx - 10, incy - 25, 62 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
-            } else if (posicion[0].equals("arriba")) {
-                mxA = (Incremento % 6) * 64;
-                myA = (Incremento / 6) * 52;
-                g2d = bi.createGraphics();
-                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-                g2d.drawImage(img, incx - 10, incy - 25, 62 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
-            } else if (posicion[0].equals("abajo")) {
-                mxA = (Incremento % 6) * 64;
-                myA = (Incremento / 6) * 52;
-                g2d = bi.createGraphics();
-                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-                g2d.drawImage(img, incx - 10, incy - 25, 62 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
-            } else if (posicion[0].equals("izquierda")) {
-                mxA = (Incremento % 6) * 64;
-                myA = (Incremento / 6) * 52;
-                g2d = bi.createGraphics();
-                g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
-                g2d.drawImage(img, incx - 40, incy - 25, 32 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
+            switch (posicion[0]) {
+                case "derecha":
+                    mxA = (Incremento % 6) * 64;
+                    myA = (Incremento / 6) * 52;
+                    g2d = bi.createGraphics();
+                    g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                    g2d.drawImage(img, incx - 10, incy - 25, 62 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
+                    break;
+                case "arriba":
+                    mxA = (Incremento % 6) * 64;
+                    myA = (Incremento / 6) * 52;
+                    g2d = bi.createGraphics();
+                    g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                    g2d.drawImage(img, incx - 10, incy - 25, 62 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
+                    break;
+                case "abajo":
+                    mxA = (Incremento % 6) * 64;
+                    myA = (Incremento / 6) * 52;
+                    g2d = bi.createGraphics();
+                    g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                    g2d.drawImage(img, incx - 10, incy - 25, 62 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
+                    break;
+                case "izquierda":
+                    mxA = (Incremento % 6) * 64;
+                    myA = (Incremento / 6) * 52;
+                    g2d = bi.createGraphics();
+                    g2d.fillRect(0, 0, AnchoVentana, AltoVentana);
+                    g2d.drawImage(img, incx - 40, incy - 25, 32 + incx, 50 + incy, mxA, myA, mxA + 64, myA + 52, this);
+                    break;
+                default:
+                    break;
             }
 
         } else {
