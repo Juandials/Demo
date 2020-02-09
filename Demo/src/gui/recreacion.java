@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -201,7 +202,7 @@ public class recreacion extends JFrame {
 
     @Override
     public void paint(Graphics g) {
-
+        System.out.println("hilo");
         g.drawImage(bi, 0, 0, null);
         int mxA = (Incremento % 5) * 64;
         int myA = (Incremento / 5) * 52;
