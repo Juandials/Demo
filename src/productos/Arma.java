@@ -1,5 +1,6 @@
 package productos;
 //PRODUCTO ABSTRACTO
 public interface Arma {
-    public String Estado();
+    public String Caracteristicas();
+    public String Arma();
 }

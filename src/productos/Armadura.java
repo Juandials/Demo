@@ -1,5 +1,6 @@
 package productos;
 //PRODUCTO ABSTRACTO
 public interface Armadura {
-    public String Estado();
+    public String Descripcion();
+    public String Armadura();
 }

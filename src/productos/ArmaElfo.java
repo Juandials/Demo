@@ -3,11 +3,12 @@ package productos;
 public class ArmaElfo implements Arma{
 
     @Override
-    public String Estado() {
-        return "Creando arma elfo";
-    }
-    public static String Arma(){
+    public String Caracteristicas() {
         return "Espada reforzada con babas de dragón";
     }
-    
+
+    @Override
+    public String Arma() {
+        return "/gui/partes_personajes/arma_elfo.png";
+    }
 }

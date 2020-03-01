@@ -1,12 +1,10 @@
 package gui;
 
-import Personajes.AbstractFactory;
 import fabricas.*;
-import javax.swing.*;
+import productos.*;
 
 public class gui extends javax.swing.JFrame {
 
-    AbstractFactory exe = new AbstractFactory();
     private String seleccion;
 
     public gui() {
@@ -31,7 +29,6 @@ public class gui extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -80,9 +77,6 @@ public class gui extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Viner Hand ITC", 0, 14)); // NOI18N
         jLabel4.setText("Armadura:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
-
-        jLabel6.setText("Estado: ");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, -1, -1));
 
         jLabel7.setEnabled(false);
         jLabel7.setName("arma_label"); // NOI18N
@@ -135,60 +129,40 @@ public class gui extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        if(seleccion.equals("Orco"))
-        {
-            exe.fabrica = new FabricaOrco();
-            jLabel9.setText(productos.CuerpoOrco.Habilidad());
-            jLabel7.setText(productos.ArmaOrco.Arma());
-            jLabel8.setText(productos.ArmaduraOrco.Armadura());
-            jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/partes_personajes/armadura_orco.png")));
-            jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/partes_personajes/arma_orco.png")));
-            jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/partes_personajes/orco.png")));
+        switch(seleccion){
+            case "Orco":
+                mostrarPersonaje(new FabricaOrco());
+                break;
+            case "Enano":
+                mostrarPersonaje(new FabricaEnano());
+                break;
+            case "Humano":
+                mostrarPersonaje(new FabricaHumano());
+                break;
+            case "Elfo":
+                mostrarPersonaje(new FabricaElfo());
+                break;
         }
-        if(seleccion.equals("Enano"))
-        {
-            exe.fabrica = new FabricaEnano();
-            jLabel9.setText(productos.CuerpoEnano.Habilidad());
-            jLabel7.setText(productos.ArmaEnano.Arma());
-            jLabel8.setText(productos.ArmaduraEnano.Armadura());
-            jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/partes_personajes/armadura_enano.png")));
-            jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/partes_personajes/arma_enano.png")));
-            jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/partes_personajes/enano.png")));
-        }
-        if(seleccion.equals("Humano"))
-        {
-            exe.fabrica = new FabricaHumano();
-            jLabel9.setText(productos.CuerpoHumano.Habilidad());
-            jLabel7.setText(productos.ArmaHumano.Arma());
-            jLabel8.setText(productos.ArmaduraHumano.Armadura());
-            jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/partes_personajes/armadura_humano.png")));
-            jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/partes_personajes/arma_humano.png")));
-            jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/partes_personajes/humano.png")));
-        }
-        if(seleccion.equals("Elfo"))
-        {
-            exe.fabrica = new FabricaElfo();
-            jLabel9.setText(productos.CuerpoElfo.Habilidad());
-            jLabel7.setText(productos.ArmaElfo.Arma());
-            jLabel8.setText(productos.ArmaduraElfo.Armadura());
-            jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/partes_personajes/armadura_elfo.png")));
-            jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/partes_personajes/arma_elfo.png")));
-            jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/partes_personajes/elfo.png")));
-        }
-        exe.cuerpo=exe.fabrica.CrearCuerpo();
-        exe.arma = exe.fabrica.CrearArma();
-        exe.armadura = exe.fabrica.CrearArmadura();
-        jLabel6.setText(exe.arma.Estado()+", "+exe.armadura.Estado()+", "+exe.cuerpo.Estado());
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    public void mostrarPersonaje(FabricaPersonaje fabrica){
+        Arma personajeArma = fabrica.CrearArma();
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource(personajeArma.Arma())));
+        jLabel7.setText(personajeArma.Caracteristicas());
+        Armadura personajeArmadura = fabrica.CrearArmadura();
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource(personajeArmadura.Armadura())));
+        jLabel8.setText(personajeArmadura.Descripcion());
+        Cuerpo personajeCuerpo = fabrica.CrearCuerpo();
+        jLabel9.setText(personajeCuerpo.Habilidad());
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource(personajeCuerpo.Cuerpo())));
+        
+    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         recreacion.eleccion = this.seleccion;
         recreacion.inicia();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -232,7 +206,6 @@ public class gui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
