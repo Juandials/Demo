@@ -2,19 +2,24 @@ package animacion;
 //CLASE DIRECTOR
 public class Animacion {
     private PersonajeBuilder personajeBuilder;
+
+    public void moverse() {
+        personajeBuilder.crearNuevoPersonaje();
+        personajeBuilder.arriba();
+        personajeBuilder.abajo();
+        personajeBuilder.derecha();
+        personajeBuilder.izquierda();
+        personajeBuilder.atacaArriba();
+        personajeBuilder.atacaAbajo();
+        personajeBuilder.atacaDerecha();
+        personajeBuilder.atacaIzquierda();
+    }
     
-    public void setPersonajeBuilder(PersonajeBuilder pb){
+    public void SetPersonajeBuilder(PersonajeBuilder pb){
         personajeBuilder = pb;
     }
     
     public Personaje getPersonaje(){
         return personajeBuilder.getPersonaje();
     }
-    
-//    public void construirPizza() {
-//        pizzaBuilder.crearNuevaPizza();
-//        pizzaBuilder.buildMasa();
-//        pizzaBuilder.buildSalsa();
-//        pizzaBuilder.buildRelleno();
-//    }
 }

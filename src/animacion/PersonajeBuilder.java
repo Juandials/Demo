@@ -12,9 +12,11 @@ public abstract class PersonajeBuilder {
     }
     
     public abstract void arriba();
-//    public abstract void buildMasa();
-//
-//    public abstract void buildSalsa();
-//
-//    public abstract void buildRelleno();
+    public abstract void abajo();
+    public abstract void derecha();
+    public abstract void izquierda();
+    public abstract void atacaArriba();
+    public abstract void atacaAbajo();
+    public abstract void atacaDerecha();
+    public abstract void atacaIzquierda();
 }
