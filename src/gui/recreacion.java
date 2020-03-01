@@ -35,33 +35,33 @@ public class recreacion extends JFrame {
     String[] posicion = {"null", "null"};
     public static String eleccion;
 
-    public void arriba() {
-        abajo = true;
-        izquierda = true;
-        derecha = true;
-        ataca = true;
-    }
-
-    public void abajo() {
-        arriba = true;
-        izquierda = true;
-        derecha = true;
-        ataca = true;
-    }
-
-    public void izquierda() {
-        abajo = true;
-        arriba = true;
-        derecha = true;
-        ataca = true;
-    }
-
-    public void derecha() {
-        abajo = true;
-        izquierda = true;
-        arriba = true;
-        ataca = true;
-    }
+//    public void arriba() {
+//        abajo = true;
+//        izquierda = true;
+//        derecha = true;
+//        ataca = true;
+//    }
+//
+//    public void abajo() {
+//        arriba = true;
+//        izquierda = true;
+//        derecha = true;
+//        ataca = true;
+//    }
+//
+//    public void izquierda() {
+//        abajo = true;
+//        arriba = true;
+//        derecha = true;
+//        ataca = true;
+//    }
+//
+//    public void derecha() {
+//        abajo = true;
+//        izquierda = true;
+//        arriba = true;
+//        ataca = true;
+//    }
 
     public recreacion() {
         fondo = h.getImage(this.getClass().getResource("/assets/map22x15_claro.png"));
