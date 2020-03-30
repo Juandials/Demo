@@ -17,8 +17,10 @@ Se implementan los patrones Builder y Abstract Factory
   
   # Builder
   
-    Patrón implementado para generar los personajes en el juego, se cuenta con la clase director Animacion, la clase producto Personaje y la clase AbstractBuilder PersonajeBuilder.
-    La clase director define el personaje que se va a crear, luego la clase que implementa AbstractBuilder construirá el personaje
+    Patrón implementado para generar los personajes en el juego, se cuenta con la clase director Animacion, la clase producto Personaje,
+    la clase AbstractBuilder PersonajeBuilder y las builder concretos de cada tipo de personaje
+    La clase director define el personaje que se va a crear, luego la clase builder concreto hereda de AbstractBuilder e instancia un
+    objeto de la clase producto.
     
    ![UML](https://github.com/Juandials/Demo/blob/master/b.png)
     
