@@ -12,4 +12,4 @@ Se implementan los patrones Builder y Abstract Factory
   Se utiliza la interfaz FabricaPersonaje para definir los métodos que usarán las fábricas concretas de cada personaje.
   En el packpage productos se encuentran las clases que generan la presentación de cada personaje.
   
-  https://raw.githubusercontent.com/juandials/Demo/abstract%20factiry.png
+  (https://raw.githubusercontent.com/juandials/Demo/abstract%20factiry.png)
