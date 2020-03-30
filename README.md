@@ -13,7 +13,7 @@ Se implementan los patrones Builder y Abstract Factory
   En el packpage productos se encuentran las clases que generan la presentación de cada personaje.
   La clase gui muestra una interfaz gráfica para seleccionar e instanciar a cada personaje.
   
- ![UML] (https://raw.github.com/Juandials/Demo/master/ab.png)
+ ![UML](https://github.com/Juandials/Demo/blob/master/ab.png)
   
   # Builder
   
